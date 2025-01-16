@@ -96,18 +96,24 @@ function ProductTable({ products }: { products: Product[] }) {
   products.forEach((product) => {
     if (product.category !== lastCategory) {
       rows.push(
-        <ProductCategoryRow
-          category={applicationTexts.productCategories[product.category]}
-          key={product.category}
-        />,
+        <tr key={product.category}>
+          <th colSpan={2} className="category-header">
+            {applicationTexts.productCategories[product.category]}
+          </th>
+        </tr>,
       );
     }
-    rows.push(<ProductRow product={product} key={product.name} />);
+    rows.push(
+      <tr key={product.name}>
+        <td className="product-name">{product.name}</td>
+        <td className="product-price">{product.price}</td>
+      </tr>,
+    );
     lastCategory = product.category;
   });
 
   return (
-    <table>
+    <table className="product-table">
       <thead>
         <tr>
           <th>{applicationTexts.productProperties.name}</th>
@@ -193,6 +199,8 @@ function getApplicationTexts() {
   return english;
 }
 
+// ... (previous imports and code)
+
 export default function App() {
   const [applicationTexts, setApplicationTexts] = useState<ApplicationTexts>(
     () => getApplicationTexts(),
@@ -205,8 +213,27 @@ export default function App() {
   }, []);
 
   return (
-    <ApplicationTextsContext value={applicationTexts}>
+    <ApplicationTextsContext.Provider value={applicationTexts}>
       <FilterableProductTable products={PRODUCTS} />
-    </ApplicationTextsContext>
+      <style>{`
+        .product-table {
+          border-collapse: separate;
+          border-spacing: 20px 0;
+        }
+
+        .category-header {
+          text-align: left;
+          padding-top: 10px;
+        }
+
+        .product-name {
+          padding-left: 20px;
+        }
+
+        .product-price {
+          text-align: right;
+        }
+      `}</style>
+    </ApplicationTextsContext.Provider>
   );
 }
