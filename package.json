@@ -4,7 +4,7 @@
   "description": "Er dette riktig da?",
   "main": "index.js",
   "scripts": {
-    "test": "prettier --check .",
+    "test": "prettier --check . && tsc --noEmit",
     "dev": "vite",
     "build": "vite build"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Meekis/kws2100-lecture2#readme",
   "devDependencies": {
     "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
     "vite": "^6.0.7"
   },
   "dependencies": {
