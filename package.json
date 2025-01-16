@@ -4,7 +4,7 @@
   "description": "Er dette riktig da?",
   "main": "index.js",
   "scripts": {
-    "test": "prettier --check . && tsc --noEmit",
+    "test": "tsc --noEmit && prettier --check .",
     "dev": "vite",
     "build": "vite build",
     "prepare": "husky"
